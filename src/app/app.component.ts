@@ -10,6 +10,7 @@ import { interval } from 'rxjs';
 })
 export class AppComponent implements OnInit{
   title = 'PNHosting';
+  subData:any ;
   private readonly publicKey = 'BFJ9ef5_JjxJRAJty47DhJhjW_oqW9gBMfGL-S6aSUzIFVfmYtZ9HJoRHUcQ4uChuFCJBXS7dmY8bd5oWUhptL0';
   constructor(private http: HttpClient, private update: SwUpdate, private appRef: ApplicationRef, private swPush: SwPush){
     this.updateClient();
@@ -64,6 +65,8 @@ export class AppComponent implements OnInit{
     this.swPush.requestSubscription({
       serverPublicKey: this.publicKey,
 
-    }).then(sub => console.log(JSON.stringify(sub))).catch(err => console.log('push error',err));
+    }).then(sub => {
+      this.subData = (JSON.stringify(sub));
+      console.log(JSON.stringify(sub))}).catch(err => console.log('push error',err));
   }
 }
